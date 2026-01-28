@@ -12,8 +12,12 @@ function Student4(){
     ];
 
     const handleClick=()=>{
-        setVisible(!visible);
-        setButtonText(visible ? "Show Student" : "Hide Student");
+        // setVisible(!visible);
+        // setButtonText(visible ? "Show Student" : "Hide Student");
+        setVisible(()=>{
+            setButtonText(!visible ? "Hide Student" : "Show Student");
+            return !visible;
+        });
     }
 
     return(
