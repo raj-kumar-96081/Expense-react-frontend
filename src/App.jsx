@@ -1,16 +1,25 @@
-
-
+import Container from 'react-bootstrap/Container';
+import {Route, Routes} from 'react-router-dom';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import AppLayout from './Components/AppLayout';
 
 function App() {
 
   return (
     <>
-      <div class="container">
-        <h1 class="text-center">Welcome to Expense App</h1>
-      </div>
-      <Container> 
-        <h1 class="text-center">Welcome to Expense App</h1>
-      </Container>
+      <Routes>
+        <Route path="/" element={
+          <AppLayout>
+            <Home />
+          </AppLayout>
+          } />
+        <Route path="/login" element={
+          <AppLayout>
+            <Login />
+          </AppLayout>
+        } />
+      </Routes>
     </>
   )
 }
