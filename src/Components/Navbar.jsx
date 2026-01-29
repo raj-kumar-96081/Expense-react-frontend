@@ -7,19 +7,22 @@ function Navbar(){
     return(
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-            <a className="navbar-brand" href="/">
+            {/* <Link className="navbar-brand" to="/">
             Home
-            </a>
-            <a className="navbar-brand" href="/login">
+            </Link>
+            <Link className="navbar-brand" to="/login">
             Login
-            </a>
+            </Link> */}
+            <Link className="navbar-brand" to="/registerf">
+            Register
+            </Link>
             <button
             className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent"
-            aria-expanded="false"
+            aria-expanded="true"
             aria-label="Toggle navigation"
             >
             <span className="navbar-toggler-icon" />
@@ -48,8 +51,8 @@ function Navbar(){
                 </a>
                 <ul className="dropdown-menu">
                     <li>
-                    <a className="dropdown-item" href="#">
-                        Action
+                    <a className="dropdown-item" href="/login">
+                        Login
                     </a>
                     </li>
                     <li>
