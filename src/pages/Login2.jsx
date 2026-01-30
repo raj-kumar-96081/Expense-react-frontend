@@ -1,18 +1,15 @@
-import './loginform1.css';
-import { useState } from 'react';
+import {useState} from 'react';
 import axios from 'axios';
+import '../Components/loginform1.css';
 
-
-function Registerform({setUser}) {
+function Login2({setUser}){
     const [formData, setFormData] = useState({
-            email: '',
-            name: '',
-            password: ''
+        email: '',
+        password: ''
     });
 
     const [errors,setErrors]=useState({});
     const [message,setMessage]=useState('');
-    
 
     const handleChange = (event) => {
         const name=event.target.name;
@@ -36,10 +33,6 @@ function Registerform({setUser}) {
         //     isValid=false;
         //     newErrors.password="Password is required";
         // }
-        if(formData.name.length===0){
-            isValid=false;
-            newErrors.name="Name is required";
-        }
         if(formData.password.length===0){
             isValid=false;
             newErrors.password="Password is required";
@@ -54,41 +47,41 @@ function Registerform({setUser}) {
     };
 
     const handleSubmit = async(event) => {
-            event.preventDefault();//Prevent default form submission behavior of reloading the page
-            if(validate()){
-                try{
-                    const body={
-                        email:formData.email,
-                        name:formData.name,
-                        password:formData.password
-                    };
-                    const config={withCredentials:true};
-                    const response=await axios.post('http://localhost:5001/auth/register',body,config);
-                    setUser(response.data.user);
-                    console.log(response);
-                    setMessage('User registered successfully!');
-                }catch(error){
-                    console.error('Registration error:',error);
-                    setErrors((p) => ({...p , message : 'Registration failed. Please try again.'}));
-                }
+        event.preventDefault();//Prevenet default form submission behavior of reloading the page
+        if(validate()){
+            try{
+                const body={
+                    email:formData.email,
+                    password:formData.password
+                };
+                const config={withCredentials:true};
+                const response=await axios.post('http://localhost:5001/auth/login',body,config);
+                setUser(response.data.user);
+                console.log(response);
+                setMessage('User logged in successfully!');
+            }catch(error){
+                console.error('Login error:',error);
+                setErrors((p) => ({...p , message : 'Login failed. Please try again.'}));
             }
-            // Add your login logic here
         }
-    
-    const handleSignInClick = (event) => {
-        event.preventDefault();
-        window.location.href = '/login2'; 
+        // Add your login logic here
     }
 
-    return (
+    const handleSignUpClick = (event) => {
+        event.preventDefault();
+        window.location.href = '/registerf'; 
+    }
+
+    return(
         <>
             {/*====== SIGNIN ONE PART START ======*/}
             <section className="signin-area signin-one">
                 <div className="container">
-                    <h2 className="text-center">Fill in details to Continue</h2>
+                    <h2 className="text-center">Login to Continue</h2>
                     <br/>
                     {message &&(message)}
                     {errors.message && (errors.message)}
+                    
                     <div className="row justify-content-center">
                         <div className="col-lg-5">
                             <form action="">
@@ -98,24 +91,13 @@ function Registerform({setUser}) {
                                             <div className="form-input">
                                                 <label>Email:</label>
                                                 <div className="input-items default">
-                                                    <input type="text" placeholder="Email" name="email" onChange={handleChange} />
+                                                    <input type="email" placeholder="Email" name="email" onChange={handleChange} />
                                                     <i className="lni lni-envelope" />
                                                 </div>
                                             </div>
                                             {/* form input */}
                                         </div>
-                                        <div className="col-md-12">
-                                            <div className="form-input">
-                                                <label>
-                                                    Name:
-                                                </label>
-                                                <div className="input-items default">
-                                                    <input type="text" placeholder="Name" name="name" onChange={handleChange} />
-                                                    <i className="lni lni-user" />
-                                                </div>
-                                            </div>
-                                            {/* form input */}
-                                        </div>
+                                        
                                         <div className="col-md-12">
                                             <div className="form-input">
                                                 <label>Password:</label>
@@ -130,7 +112,7 @@ function Registerform({setUser}) {
                                             <div className="form-input rounded-buttons">
                                                 <button
                                                     className="btn primary-btn rounded-full"
-                                                    type="submit" onClick={handleSignInClick}
+                                                    type="submit" onClick={handleSubmit}
                                                 >
                                                     Sign In!
                                                 </button>
@@ -141,7 +123,7 @@ function Registerform({setUser}) {
                                             <div className="form-input rounded-buttons">
                                                 <button
                                                     className="btn primary-btn-outline rounded-full"
-                                                    type="submit" onClick={handleSubmit}
+                                                    type="submit" onClick={handleSignUpClick}
                                                 >
                                                     Sign Up
                                                 </button>
@@ -171,6 +153,7 @@ function Registerform({setUser}) {
             </section>
             {/*====== SIGNIN ONE PART ENDS ======*/}
         </>
+
     );
 }
-export default Registerform;
+export default Login2;

@@ -1,6 +1,5 @@
 
 import {Link} from 'react-router-dom';
-import Header from "./Header";
 
 
 function Navbar(){
@@ -13,9 +12,9 @@ function Navbar(){
             <Link className="navbar-brand" to="/login">
             Login
             </Link> */}
-            <Link className="navbar-brand" to="/registerf">
+            {/* <Link className="navbar-brand" to="/registerf">
             Register
-            </Link>
+            </Link> */}
             <button
             className="navbar-toggler"
             type="button"
@@ -38,6 +37,13 @@ function Navbar(){
                 <Link className="nav-link" to="/login">
                     Login
                 </Link>
+                
+                </li>
+                <li className="nav-item">
+                <Link className="nav-link" to="/login2">
+                    Login2
+                </Link>
+                
                 </li>
                 <li className="nav-item dropdown">
                 <a
@@ -47,7 +53,7 @@ function Navbar(){
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                 >
-                    Dropdown
+                    Services
                 </a>
                 <ul className="dropdown-menu">
                     <li>
@@ -55,6 +61,12 @@ function Navbar(){
                         Login
                     </a>
                     </li>
+                    <li>
+                        <Link className="dropdown-item" to="/registerf">
+                        Register
+                        </Link>
+                    </li>
+                    
                     <li>
                     <a className="dropdown-item" href="#">
                         Another action

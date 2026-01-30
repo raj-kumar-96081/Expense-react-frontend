@@ -2,7 +2,7 @@
 import {useState} from 'react';
 import axios from 'axios';
 
-function Login(){
+function Login({setUser}){
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -57,6 +57,7 @@ function Login(){
                 const config={withCredentials:true};
                 const response=await axios.post('http://localhost:5001/auth/login',body,config);
                 console.log(response);
+                setUser(response.data.user);
                 setMessage('User logged in successfully!');
             }catch(error){
                 console.error('Login error:',error);
@@ -67,10 +68,11 @@ function Login(){
     }
     return(
         <div className="container">
-            <h2 className="text-center">Login to continue..</h2>
+            <h2 className="text-center">Login to Continue</h2>
+            <br/>
             {message &&(message)}
             {errors.message && (errors.message)}
-
+            <br/>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="email">Email:</label>
