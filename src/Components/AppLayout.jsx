@@ -5,7 +5,7 @@ import Navbar from './Navbar';
 function AppLayout({ children }) {
     return(
        <>
-        <Navbar />
+        <Header />
         {children}
         <Footer />
        </>

@@ -2,7 +2,9 @@
 import {useState} from 'react';
 import axios from 'axios';
 
-function Login({setUser}){
+function Login(){
+    const dispatch = useDispatch();
+
     const [formData, setFormData] = useState({
         email: '',
         password: ''

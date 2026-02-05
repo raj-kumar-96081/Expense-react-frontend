@@ -1,7 +1,7 @@
 function Footer() {
     return(
-        <div className="Container">
-            This is Footer
+        <div className="Container-fluid bg-light text-center py-3">
+             All rights reserved.
         </div>
     );
 }
