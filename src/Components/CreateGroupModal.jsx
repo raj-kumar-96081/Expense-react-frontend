@@ -1,10 +1,10 @@
 import axios from "axios";
-import {useState} from 'react';
+import { useState } from 'react';
 import { serverEndpoint } from "../config/appConfig";
- import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-function CreateGroupModal({ show ,onHide, onSuccess }) {
-     const user = useSelector((state) => state.userDetails);
+function CreateGroupModal({ show, onHide, onSuccess }) {
+    const user = useSelector((state) => state.userDetails);
     const [formdata, setFormData] = useState({
         name: "",
         description: ""
@@ -34,50 +34,53 @@ function CreateGroupModal({ show ,onHide, onSuccess }) {
         const value = e.target.value;
         setFormData({
             ...formdata,
-            [ name ]: value
+            [name]: value
         });
 
-        if(errors[e.target.name]){
-            setErrors({...errors,[e.target.name]:null});
+        if (errors[e.target.name]) {
+            setErrors({ ...errors, [e.target.name]: null });
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if(validate()){
-            try{
-                await axios.post(
-                    `${serverEndpoint}/groups/create`, 
+        if (validate()) {
+            try {
+                const response = await axios.post(
+                    `${serverEndpoint}/groups/create`,
                     { name: formdata.name, description: formdata.description },
-                    {withCredential:true}
+                    { withCredentials: true }
                 );
-                 const groupId = response.data.groupId; +
-                onSuccess({ 
-                    name: formdata.name, 
-                    description: formdata.description, 
-                    _id: groupId, 
-                    membersEmail: [user.email], 
-                    paymentStatus: { 
-                        amount: 0, 
-                        currency: "INR", 
-                        date: "2026-02-02T16:02:05.110Z", 
-                        isPaid: false, 
-                    }, 
-                    thumbnail: "", 
-                    isPaid: false, 
+                const groupId = response.data.groupId;
+                onSuccess({
+                    name: formdata.name,
+                    description: formdata.description,
+                    _id: groupId,
+                    membersEmail: [user.email],
+                    adminEmail: user.email,
+                    paymentStatus: {
+                        amount: 0,
+                        currency: "INR",
+                        date: new Date().toISOString(),
+                        isPaid: false,
+                    },
+                    thumbnail: "",
+                    isPaid: false,
                 });
-                onSuccess();
+                setFormData({ name: "", description: "" });
                 onHide();
-            }catch(errors){
+            } catch (errors) {
                 console.log(errors);
-                setErrors({message:"unable to add group,please try again"});
+                setErrors({ message: "unable to add group,please try again" });
+            } finally {
+                setLoading(false);
             }
         }
 
     };
     if (!show) {
-        return;
+        return null;
     }
     return (
         <div className="modal show d-block">
@@ -91,20 +94,20 @@ function CreateGroupModal({ show ,onHide, onSuccess }) {
                         <div className="modal-body">
                             <div className="mb-3">
                                 <label className="form-lable small fw-bold ">Group Name</label>
-                                <input type="text" className={errors.name?'form-control is-invalid':'form-control'} name="name" value={formdata.name} onChange={onChange} />
-                                {setErrors.name && (
+                                <input type="text" className={errors.name ? 'form-control is-invalid' : 'form-control'} name="name" value={formdata.name} onChange={onChange} />
+                                {errors.name && (
                                     <div className="invalid-feedback">
-                                        {setErrors.name}
+                                        {errors.name}
                                     </div>
                                 )}
 
                             </div>
                             <div className="mb-3">
                                 <label className="form-lable small fw-bold "> Description</label>
-                                <input type="text" className={errors.description?'form-control is-invalid':'form-control'} name="Description" value={formdata.description} onChange={onChange} />
+                                <input type="text" className={errors.description ? 'form-control is-invalid' : 'form-control'} name="description" value={formdata.description} onChange={onChange} />
 
                             </div>
-                            {errors.description &&(
+                            {errors.description && (
                                 <div className="invalid-feedback">
                                     {errors.description}
                                 </div>

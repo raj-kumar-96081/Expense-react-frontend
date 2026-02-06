@@ -15,6 +15,7 @@ import Logout from './pages/Logout';
 import DashNav from './Components/DashNav';
 import AppLayout from './Components/AppLayout';
 import Groups from './pages/Groups';
+import ManageUsers from './pages/ManageUsers';
 
 
 
@@ -119,6 +120,17 @@ function App() {
             userDetails?(
               <DashNav>
                 <Groups/>
+              </DashNav>
+            ):(
+              <Navigate to="/login2"/>
+            )
+          }
+        />
+        <Route
+          path="/manage-users" element={
+            userDetails?(
+              <DashNav>
+                <ManageUsers/>
               </DashNav>
             ):(
               <Navigate to="/login2"/>

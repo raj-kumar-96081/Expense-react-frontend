@@ -40,6 +40,11 @@ function UserHeader() {
                             </Link>
                         </li>
                         <li className="nav-item">
+                            <Link className="nav-link" to="/manage-users">
+                                Manage Users
+                            </Link>
+                        </li>
+                        <li className="nav-item">
                             <Link className="nav-link" to="/logout">
                                 Logout
                             </Link>
