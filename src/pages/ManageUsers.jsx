@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { serverEndpoint } from "../config/appConfig";
 import axios from "axios";
+import Can from "../Components/can";
+
 
 function ManageUsers() {
 
@@ -128,66 +130,68 @@ function ManageUsers() {
 
             <div className="row">
                 {/* Add user form */}
-                <div className="col-md-3">
-                    <div className="card-shadow-sm">
-                        <div className="card-header">
-                            <h5>Add Member</h5>
-                        </div>
-                        <div className="card-body p-2">
-                            <form onSubmit={handleSubmit}>
-                                <div className="mb-3">
-                                    <label className="form-label"> Name</label>
-                                    <input type="text" name="name" className={errors.name ? `form-control is-invalid` : `form-control`} value={formData.name} onChange={handleChange} />
-                                    {errors.name && (
-                                        <div className="invalid-feedback ps-1">
-                                            {errors.name}
-                                        </div>
-                                    )}
-                                </div>
-                                <div className="mb-3">
-                                    <label className="form-label"> Email</label>
-                                    <input type="text" name="email" className={errors.email ? `form-control is-invalid` : `form-control`} value={formData.email} onChange={handleChange} />
-                                    {errors.email && (
-                                        <div className="invalid-feedback ps-1">
-                                            {errors.email}
-                                        </div>
-                                    )}
-                                </div>
-                                <div className="mb-3">
-                                    <label className="form-label"> Role</label>
-                                    <select type="text" name="role" className={errors.role ? `form-select is-invalid` : `form-select`} value={formData.role} onChange={handleChange}>
-                                        <option value="Select">Select</option>
-                                        <option value="manager">Manager</option>
-                                        <option value="viewer">Viewer</option>
-
-                                    </select>
-                                    {errors.role && (
-                                        <div className="invalid-feedback ps-1">
-                                            {errors.role}
-                                        </div>
-                                    )}
-
-                                </div>
-                                <div className="mb-3">
-                                    <button className="btn btn-primary w-100">
-                                        {actionLoading ? (
-                                            <div
-                                                className="spinner-border"
-                                                role="status"
-                                            >
-                                                <span className="visually-hidden">
-                                                    Loading...
-                                                </span>
+                <Can requiredPermission="canCreateUsers">
+                    <div className="col-md-3">
+                        <div className="card-shadow-sm">
+                            <div className="card-header">
+                                <h5>Add Member</h5>
+                            </div>
+                            <div className="card-body p-2">
+                                <form onSubmit={handleSubmit}>
+                                    <div className="mb-3">
+                                        <label className="form-label"> Name</label>
+                                        <input type="text" name="name" className={errors.name ? `form-control is-invalid` : `form-control`} value={formData.name} onChange={handleChange} />
+                                        {errors.name && (
+                                            <div className="invalid-feedback ps-1">
+                                                {errors.name}
                                             </div>
-                                        ) : (
-                                            <>Add</>
                                         )}
-                                    </button>
-                                </div>
-                            </form>
+                                    </div>
+                                    <div className="mb-3">
+                                        <label className="form-label"> Email</label>
+                                        <input type="text" name="email" className={errors.email ? `form-control is-invalid` : `form-control`} value={formData.email} onChange={handleChange} />
+                                        {errors.email && (
+                                            <div className="invalid-feedback ps-1">
+                                                {errors.email}
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="mb-3">
+                                        <label className="form-label"> Role</label>
+                                        <select type="text" name="role" className={errors.role ? `form-select is-invalid` : `form-select`} value={formData.role} onChange={handleChange}>
+                                            <option value="Select">Select</option>
+                                            <option value="manager">Manager</option>
+                                            <option value="viewer">Viewer</option>
+
+                                        </select>
+                                        {errors.role && (
+                                            <div className="invalid-feedback ps-1">
+                                                {errors.role}
+                                            </div>
+                                        )}
+
+                                    </div>
+                                    <div className="mb-3">
+                                        <button className="btn btn-primary w-100">
+                                            {actionLoading ? (
+                                                <div
+                                                    className="spinner-border"
+                                                    role="status"
+                                                >
+                                                    <span className="visually-hidden">
+                                                        Loading...
+                                                    </span>
+                                                </div>
+                                            ) : (
+                                                <>Add</>
+                                            )}
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </Can>
                 {/* View user field */}
                 <div className="col-md-9">
                     <div className="card shadow-sm">

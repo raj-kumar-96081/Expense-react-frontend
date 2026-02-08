@@ -16,6 +16,8 @@ import DashNav from './Components/DashNav';
 import AppLayout from './Components/AppLayout';
 import Groups from './pages/Groups';
 import ManageUsers from './pages/ManageUsers';
+import ProtectedRoute from './rbac/ProtectedRoute';
+import UnauthorizedAccess from './Components/errors/UnauthorizedAccess';
 
 
 
@@ -117,26 +119,43 @@ function App() {
 
         <Route
           path="/groups" element={
-            userDetails?(
+            userDetails ? (
               <DashNav>
-                <Groups/>
+                <Groups />
               </DashNav>
-            ):(
-              <Navigate to="/login2"/>
+            ) : (
+              <Navigate to="/login2" />
             )
           }
         />
         <Route
           path="/manage-users" element={
-            userDetails?(
-              <DashNav>
-                <ManageUsers/>
-              </DashNav>
-            ):(
-              <Navigate to="/login2"/>
+            userDetails ? (
+              <ProtectedRoute roles={["admin"]}>
+                <DashNav>
+                  <ManageUsers />
+                </DashNav>
+              </ProtectedRoute>
+            ) : (
+              <Navigate to="/login2" />
             )
           }
         />
+        <Route
+          path="/unauthorized-access" element={
+            userDetails ? (
+
+              <DashNav>
+                <UnauthorizedAccess />
+              </DashNav>
+            ) : (
+              <AppLayout>
+                <UnauthorizedAccess />
+              </AppLayout>
+            )
+          }
+        />
+
 
 
       </Routes>
