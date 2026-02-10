@@ -18,7 +18,7 @@ import Groups from './pages/Groups';
 import ManageUsers from './pages/ManageUsers';
 import ProtectedRoute from './rbac/ProtectedRoute';
 import UnauthorizedAccess from './Components/errors/UnauthorizedAccess';
-
+import ManagePayments from "./pages/ManagePayments";
 
 
 
@@ -131,7 +131,7 @@ function App() {
         <Route
           path="/manage-users" element={
             userDetails ? (
-              <ProtectedRoute roles={["admin"]}>
+              <ProtectedRoute roles={["admin", "manager"]}>
                 <DashNav>
                   <ManageUsers />
                 </DashNav>
@@ -152,6 +152,20 @@ function App() {
               <AppLayout>
                 <UnauthorizedAccess />
               </AppLayout>
+            )
+          }
+        />
+
+        <Route
+          path="/manage-payments" element={
+            userDetails ? (
+              <ProtectedRoute roles={["admin"]}>
+                <DashNav>
+                  <ManagePayments />
+                </DashNav>
+              </ProtectedRoute>
+            ) : (
+              <Navigate to="/login2" />
             )
           }
         />

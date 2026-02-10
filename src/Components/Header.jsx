@@ -28,11 +28,11 @@ function Header() {
                         </li>
                         <li>
                             <Link className="nav-link" to="/login2">
-                                Login2
+                                Login
                             </Link>
                         </li>
                         <li>
-                            <Link className="nav link" to="/registerf">
+                            <Link className="nav-link" to="/registerf">
                                 Register
                             </Link>
 

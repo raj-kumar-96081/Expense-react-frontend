@@ -10,7 +10,7 @@ function GroupCard({ group, onUpdate }) {
     const [error, setErrors] = useState({});
 
     const handleShowMembers = () => {
-        setShowMembers(showMembers);
+        setShowMembers(!showMembers);
     }
 
     const handleAddMember = async () => {
@@ -24,7 +24,7 @@ function GroupCard({ group, onUpdate }) {
                 groupId: group._id,
                 emails: { memberEmail }
             },
-                { withCredential: true }
+                { withCredentials: true }
             );
             onUpdate(response.data);
         } catch (error) {
@@ -39,17 +39,19 @@ function GroupCard({ group, onUpdate }) {
             <div className="card-body p-4 ">
                 <div>
                     <h5 className="">{group.name}</h5>
-                    <button className="btn btn-sm btn-link p-0 text-primary " onClick={handleShowMembers}>
-                        {group.membersEmail.length} | Show Members
+                    <button className="btn btn-md p-2 text-primary fw-bold" onClick={handleShowMembers}>
+                        Show Members | {group.membersEmail.length}
                     </button>
                 </div>
                 <p>{group.description}</p>
 
                 {showMembers && (
                     <div className="rounded-3 p-3 mb-3 border">
-                        <h4>Memebrs in this Group</h4>
+                        <h4>Members in this Group:</h4>
                         {group.membersEmail.map((member, index) => (
-                            <div>{index + 1}.{member}</div>
+                            <div key={member}>
+                                {index + 1}.{member}
+                            </div>
                         ))}
                     </div>
                 )}
