@@ -213,8 +213,8 @@ function AddExpenseForm({ groupId, membersEmail = [], onSuccess }) {
                             <div className="text-end">
                                 <small
                                     className={`fw-semibold ${remainingAmount === 0
-                                            ? "text-success"
-                                            : "text-danger"
+                                        ? "text-success"
+                                        : "text-danger"
                                         }`}
                                 >
                                     Remaining: ₹
@@ -234,114 +234,3 @@ export default AddExpenseForm;
 
 
 
-// import { useState, useEffect } from "react";
-// import { addExpense } from "../../service/expenseApi";
-
-
-// function AddExpenseForm({ groupId, membersEmail = [], onSuccess }) {
-//     const [splitType, setSplitType] = useState("equal");
-
-//     const [splits, setSplits] = useState([]);
-
-//     const [formData, setFormData] = useState({
-//         description: "",
-//         amount: "",
-//     });
-
-//     const handleChange = (e) => {
-//         setFormData((prev) => ({
-//             ...prev,
-//             [e.target.name]: e.target.value,
-//         }));
-//     };
-
-//     const handleSubmit = async (e) => {
-//         e.preventDefault();
-
-//         const expenseAmount = Number(formData.amount);
-
-//         if (!membersEmail.length) {
-//             alert("No group members found");
-//             return;
-//         }
-
-//         // ✅ Equal Split Logic
-//         const splitAmount = expenseAmount / membersEmail.length;
-
-//         const splits = membersEmail.map((email) => ({
-//             email,
-//             amount: splitAmount,
-//         }));
-
-//         try {
-//             await addExpense({
-//                 groupId,
-//                 description: formData.description,
-//                 amount: expenseAmount,
-//                 splits,
-//             });
-
-//             setFormData({ description: "", amount: "" });
-//             onSuccess();
-//         } catch (error) {
-//             console.error("Error adding expense:", error);
-//         }
-//     };
-
-//     useEffect(() => {
-//         if (membersEmail.length) {
-//             const initialSplits = membersEmail.map(email => ({
-//                 email,
-//                 amount: ""
-//             }));
-//             setSplits(initialSplits);
-//         }
-//     }, [membersEmail]);
-
-//     return (
-//         <div className="card shadow-sm border-0 mb-4">
-//             <div className="card-body">
-//                 <h5 className="fw-bold mb-3">Add New Expense</h5>
-
-//                 <form onSubmit={handleSubmit}>
-//                     <div className="row g-3">
-//                         <div className="col-md-6">
-//                             <input
-//                                 type="text"
-//                                 className="form-control"
-//                                 placeholder="Expense Title"
-//                                 name="description"
-//                                 value={formData.description}
-//                                 onChange={handleChange}
-//                                 required
-//                             />
-//                         </div>
-
-//                         <div className="col-md-4">
-//                             <input
-//                                 type="number"
-//                                 className="form-control"
-//                                 placeholder="Amount"
-//                                 name="amount"
-//                                 value={formData.amount}
-//                                 onChange={handleChange}
-//                                 required
-//                             />
-//                         </div>
-
-//                         <div className="col-md-2">
-//                             <button
-//                                 type="submit"
-//                                 className="btn btn-primary w-100"
-//                             >
-//                                 Add
-//                             </button>
-//                         </div>
-//                     </div>
-//                 </form>
-//             </div>
-//         </div>
-//     );
-// }
-
-// export default AddExpenseForm;

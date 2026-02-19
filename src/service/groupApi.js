@@ -53,3 +53,9 @@ export const getGroupAudit = (groupId) =>
     axios.get(`${serverEndpoint}/groups/${groupId}/audit`, {
         withCredentials: true,
     });
+
+export const getMyGroupsDash = (page = 1, limit = 10, sortBy = "newest") =>
+    axios.get(`${serverEndpoint}/groups/my-groups`, {
+        params: { page, limit, sortBy },
+        withCredentials: true,
+    });

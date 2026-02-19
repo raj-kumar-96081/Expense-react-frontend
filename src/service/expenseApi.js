@@ -22,3 +22,7 @@ export const settleGroup = (groupId) =>
         {},
         { withCredentials: true }
     );
+export const getRecentExpenses = () =>
+    axios.get(`${serverEndpoint}/api/expenses/recent`, {
+        withCredentials: true,
+    });
