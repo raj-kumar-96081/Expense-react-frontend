@@ -1,8 +1,7 @@
-function UserFooter(){
-    return(
-        <div className="container">
-            This is footer
-            
+function UserFooter() {
+    return (
+        <div className="Container-fluid bg-light text-center py-3">
+            All rights reserved.
         </div>
     );
 }

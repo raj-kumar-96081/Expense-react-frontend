@@ -19,7 +19,8 @@ import ManageUsers from './pages/ManageUsers';
 import ProtectedRoute from './rbac/ProtectedRoute';
 import UnauthorizedAccess from './Components/errors/UnauthorizedAccess';
 import ManagePayments from "./pages/ManagePayments";
-
+import ManageSubscription from "./pages/ManageSubscription";
+import GroupExpenses from "./pages/GroupExpenses";
 
 
 function App() {
@@ -162,6 +163,35 @@ function App() {
               <ProtectedRoute roles={["admin"]}>
                 <DashNav>
                   <ManagePayments />
+                </DashNav>
+              </ProtectedRoute>
+            ) : (
+              <Navigate to="/login2" />
+            )
+          }
+        />
+
+        <Route
+          path="/manage-subscription" element={
+            userDetails ? (
+              <ProtectedRoute roles={["admin"]}>
+                <DashNav>
+                  <ManageSubscription />
+                </DashNav>
+              </ProtectedRoute>
+            ) : (
+              <Navigate to="/login2" />
+            )
+          }
+        />
+
+        <Route
+          path="/groups/:groupId/expenses"
+          element={
+            userDetails ? (
+              <ProtectedRoute roles={["admin", "manager", "user"]}>
+                <DashNav>
+                  <GroupExpenses />
                 </DashNav>
               </ProtectedRoute>
             ) : (

@@ -22,7 +22,7 @@ function ManagePayments() {
     const [errors, setErrors] = useState({});
     const [message, setMessage] = useState('');
     const [userProfile, setUserProfile] = useState(null);
-    // const [selectedCredits, setSelectedCredits] = useState(null);
+    const [selectedCredits, setSelectedCredits] = useState(null);
 
     const getUserProfile = async () => {
         try {
@@ -39,10 +39,10 @@ function ManagePayments() {
             setLoading(false);
         }
     };
-    +
-        useEffect(() => {
-            getUserProfile();
-        }, []);
+
+    useEffect(() => {
+        getUserProfile();
+    }, []);
 
     const paymentResponseHandler = async (credits, payment) => {
         try {

@@ -45,10 +45,17 @@ function UserHeader() {
                             </Link>
                         </li>
                         <li>
-                            <Link className='dropdown-item py-2 fw-medium' to="/manage-payments">
-                                <i className="bi bi-person-check me-2"></i> {""} Payments & Subscription
+                            <Link className='nav-link' to="/manage-payments">
+                                <i className="bi bi-person-check me-2"></i> {""}
+                                Manage Credits
                             </Link>
 
+                        </li>
+                        <li>
+                            <Link className='nav-link' to="/manage-subscription">
+                                <i className="bi bi-person-check me-2"></i> {""}
+                                Manage Subscription
+                            </Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="/logout">
