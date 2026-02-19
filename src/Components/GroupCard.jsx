@@ -15,14 +15,14 @@ function GroupCard({ group, onUpdate }) {
 
         try {
             const response = await axios.patch(
-                `${serverEndpoint}/groups/members/add`,
+                `${serverEndpoint}/groups/members/add/`,
                 {
                     groupId: group._id,
-                    emails: [memberEmail],
+                    emails: { memberEmail },
                 },
                 { withCredentials: true }
             );
-            setMemberEmail("");
+            // setMemberEmail("");
             onUpdate(response.data);
         } catch (error) {
             console.log(error);
@@ -77,7 +77,7 @@ function GroupCard({ group, onUpdate }) {
                             className="overflow-auto"
                             style={{ maxHeight: "150px" }}
                         >
-                            {group.membersEmail.map((member, index) => (
+                            {group.membersEmail?.filter(Boolean).map((members, index) => (
                                 <div
                                     key={index}
                                     className="d-flex align-items-center mb-2 last-child-mb-0"
@@ -90,13 +90,14 @@ function GroupCard({ group, onUpdate }) {
                                             fontSize: "10px",
                                         }}
                                     >
-                                        {member.charAt(0).toUpperCase()}
+
+                                        {members?.charAt(0)?.toUpperCase() || "?"}
                                     </div>
                                     <span
                                         className="small text-dark text-truncate"
-                                        title={member}
+                                        title={members}
                                     >
-                                        {member}
+                                        {members}
                                     </span>
                                 </div>
                             ))}
