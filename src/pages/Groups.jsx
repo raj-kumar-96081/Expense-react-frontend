@@ -163,8 +163,8 @@
 import axios from "axios";
 import { serverEndpoint } from "../config/appConfig";
 import { useEffect, useState } from "react";
-import GroupCard from "../components/GroupCard";
-import CreateGroupModal from "../components/CreateGroupModal";
+import GroupCard from "../Components/GroupCard";
+import CreateGroupModal from "../Components/CreateGroupModal";
 import { usePermission } from "../rbac/userPermissions";
 
 function Groups() {

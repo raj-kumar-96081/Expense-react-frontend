@@ -8,10 +8,10 @@ import {
 
 import { getGroupById } from "../service/groupApi";   // ✅ FIXED
 
-import AddExpenseForm from "../components/expenses/AddExpenseForm";
-import ExpenseList from "../components/expenses/ExpenseList";
-import ExpenseSummary from "../components/expenses/ExpenseSummary";
-import SettleGroupButton from "../components/expenses/SettleGroupButton";
+import AddExpenseForm from "../Components/expenses/AddExpenseForm";
+import ExpenseList from "../Components/expenses/ExpenseList";
+import ExpenseSummary from "../Components/expenses/ExpenseSummary";
+import SettleGroupButton from "../Components/expenses/SettleGroupButton";
 
 function GroupExpenses() {
     const { groupId } = useParams();
