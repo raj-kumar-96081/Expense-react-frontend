@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { serverEndpoint } from "../config/appConfig";
 import axios from "axios";
-import Can from "../Components/can";
+import Can from "../Components/Can";
 
 
 function ManageUsers() {
