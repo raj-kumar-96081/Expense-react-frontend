@@ -4,6 +4,8 @@ import axios from 'axios';
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
 import { SET_USER } from "../redux/user/action";
+import { serverEndpoint } from "../config/appConfig";
+
 
 
 function Registerform() {
@@ -89,7 +91,7 @@ function Registerform() {
     const handleGoogleSuccess = async (authResponse) => {
         try {
             const response = await axios.post(
-                "http://localhost:5001/auth/google-auth",
+                `${serverEndpoint}/auth/google-auth`,
                 { idToken: authResponse?.credential },
                 { withCredentials: true }
             );
